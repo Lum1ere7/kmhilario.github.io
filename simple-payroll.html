@@ -1,0 +1,301 @@
+<!doctype html>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Simple employee payroll calculator" name="description"/>
+<title>Payroll Program</title>
+<!-- apply saved dark theme immediately before rendering to prevent flash of light theme -->
+<style>
+:root{color-scheme:light;--ink:#172b3a;--muted:#647789;--paper:#f4f8fb;--white:#fff;--teal:#087f8c;--teal2:#0ca6a6;--line:#dce7ed;--shadow:0 16px 42px rgba(22,55,75,.09}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 10% 0,#dceff1 0,transparent 38%),var(--paper);font:16px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);min-height:100vh}
+a{color:inherit;text-decoration:none}.app-frame{max-width:1180px;margin:auto;padding:34px 24px 60px}.top-navigation{display:none!important}.workspace{border:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important}.window-dots{display:none!important}.workspace-content{padding:0!important;max-width:none!important}.page-title{padding:0 0 22px!important;margin:0 0 22px!important;border-bottom:1px solid var(--line)}.page-title h1{font-size:clamp(2rem,4vw,3.15rem)!important;letter-spacing:-.055em!important;font-weight:800!important;color:var(--ink)!important;margin:0 0 7px!important}.page-title p,.instruction{color:var(--muted)!important;font-size:1rem!important}.instruction{margin:0 0 22px!important}.panel{background:var(--white)!important;border:1px solid var(--line)!important;border-radius:22px!important;box-shadow:var(--shadow)!important;overflow:hidden}.panel-header{padding:17px 22px!important;background:#f1f7f9!important;border-bottom:1px solid var(--line)!important;color:#476273!important;font-size:.78rem!important;letter-spacing:.08em!important}.panel-body{padding:24px!important}.panel h2{font-size:1.2rem;color:var(--ink)}label, .section-label{color:#4a6374!important;font-weight:650}input,select{font:inherit!important;color:var(--ink)!important;background:#f8fbfc!important;border:1px solid #d5e2e9!important;border-radius:12px!important;padding:13px 14px!important;min-height:48px}input:focus{outline:3px solid #bce8e8!important;border-color:var(--teal)!important}.primary-button,button{font:inherit;cursor:pointer}.primary-button{border:0!important;border-radius:12px!important;padding:13px 20px!important;background:linear-gradient(120deg,var(--teal),var(--teal2))!important;color:white!important;font-weight:750!important;box-shadow:0 8px 18px #087f8c2b!important;transition:transform .15s,filter .15s}.primary-button:hover{transform:translateY(-1px);filter:brightness(1.05)}.conversion-layout,.tax-layout,.payroll-layout,.arithmetic-layout{gap:22px!important;align-items:stretch}.unit-options{gap:10px!important}.unit-option{border:1px solid var(--line)!important;border-radius:14px!important;background:#f8fbfc!important;color:var(--ink)!important;padding:14px!important}.unit-option.selected{border-color:var(--teal)!important;background:#e8f7f7!important;box-shadow:inset 0 0 0 1px var(--teal)!important}.large-result{color:var(--teal)!important;font-weight:850!important;letter-spacing:-.04em}.formula,.how-it-works,.payroll-formulas{background:#f0f7f8!important;border:1px solid #dcebed!important;border-radius:14px!important;padding:15px!important}.tax-row,.arithmetic-row{border-bottom:1px solid var(--line)!important;padding:14px 0!important}.tax-result{color:var(--teal)!important}.payroll-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px}table{border-collapse:collapse;width:100%;min-width:640px}th{background:#eff7f8;color:#476273;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}th,td{padding:12px;border-bottom:1px solid var(--line);text-align:left}tbody tr:nth-child(even){background:#f8fbfc}.delete-area{background:#fff4f1!important;border:1px solid #f2d7cf!important;border-radius:14px!important;padding:16px!important}.home-workspace{padding-top:0!important}.home-top-divider{display:none}.home-hero-card{padding:clamp(26px,5vw,54px)!important;background:linear-gradient(125deg,#123b50,#087f8c)!important;color:white!important;border:0!important;position:relative;overflow:hidden}.home-hero-card:after{content:"";position:absolute;width:260px;height:260px;border:40px solid #ffffff14;border-radius:50%;right:-70px;top:-100px}.home-eyebrow{color:#a8e5e5!important;text-transform:uppercase;letter-spacing:.16em;font-size:.75rem;font-weight:800}.home-hero-card h1{font-size:clamp(2.5rem,7vw,5rem)!important;letter-spacing:-.06em!important;line-height:1.05;margin:12px 0!important;color:white!important}.home-author{color:#d2e9ef!important;margin:0!important}.home-tools-panel{margin-top:24px}.home-tools-header{display:flex;align-items:center;justify-content:space-between}.home-tools-header h2{margin:0;color:var(--ink)}.home-tools-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px!important;padding:22px!important}.home-tool-card{display:flex!important;align-items:center;gap:16px;padding:22px!important;border:1px solid var(--line)!important;border-radius:17px!important;background:#fbfdfe!important;transition:transform .16s,border-color .16s,box-shadow .16s}.home-tool-card:hover{transform:translateY(-3px);border-color:#83caca!important;box-shadow:0 12px 24px #183f5010}.home-tool-badge{display:grid;place-items:center;flex:0 0 48px;height:48px;border-radius:14px;background:#e3f3f4!important;color:var(--teal)!important;font-weight:850!important}.home-tool-info{min-width:0}.home-tool-assignment{font-size:.68rem!important;letter-spacing:.1em;color:var(--teal)!important;font-weight:800}.home-tool-info h3{margin:3px 0!important;font-size:1.1rem!important;color:var(--ink)!important}.home-tool-info p{margin:0!important;color:var(--muted)!important;font-size:.88rem!important}.home-tool-arrow{margin-left:auto;color:var(--teal)!important;font-size:1.5rem!important}.home-tools-footer{display:none!important}.home-hero-card,.home-tool-card{cursor:pointer}.error{color:#b42318!important}@media(max-width:760px){.app-frame{padding:22px 14px 40px}.conversion-layout,.tax-layout,.payroll-layout,.arithmetic-layout{display:grid!important;grid-template-columns:1fr!important}.home-tools-grid{grid-template-columns:1fr!important;padding:15px!important}.panel-body{padding:18px!important}.home-tool-card{padding:16px!important}}
+</style>
+</head>
+<body>
+<!-- outer wrapper holding the top navigation bar and main workspace -->
+<div class="app-frame">
+<!-- header containing university logo, folder-style navigation tabs, and theme switcher -->
+
+<!-- main browser-window style workspace area -->
+<main class="workspace">
+<!-- decorative window control dots -->
+
+<div class="workspace-content">
+<!-- page title and subtitle header -->
+<header class="page-title">
+<h1>Simple Payroll</h1>
+<p>Employee Details | Gross Pay | Net Pay</p>
+</header>
+<p class="instruction">Enter employee details to add a payroll record, or delete a record by its line number.
+        </p>
+<!-- two-column layout pairing the employee entry form with the dynamic payroll table -->
+<div class="payroll-layout">
+<!-- left panel: form for inputting employee name, days worked, daily rate, and deductions -->
+<section class="panel employee-card">
+<header class="panel-header">
+<strong>01 / EMPLOYEE DETAILS</strong>
+</header>
+<div class="panel-body">
+<form id="payroll-form">
+<label>
+<span>Employee Name</span>
+<input id="emp-name" pattern="[A-Za-z\s]+" placeholder="Enter employee name" required="" title="Letters and spaces only" type="text"/>
+</label>
+<div class="two-fields">
+<label>
+<span>Days Worked</span>
+<input id="emp-days" min="0" placeholder="e.g. 22" required="" type="number"/>
+</label>
+<label>
+<span>Daily Rate</span>
+<input id="emp-rate" min="0" placeholder="₱ 0" required="" type="number"/>
+</label>
+</div>
+<label>
+<span>Deduction Amount</span>
+<input id="emp-deduction" min="0" placeholder="₱ 0" required="" type="number"/>
+</label>
+<button class="primary-button" type="submit">
+                  Add to payroll
+                </button>
+</form>
+<div class="how-it-works compact">
+<strong>HOW IT WORKS</strong>
+<p>Add an employee to calculate gross and net pay.</p>
+</div>
+</div>
+</section>
+<!-- right panel: payroll table, empty state placeholder, formulas, and record deletion controls -->
+<section class="panel payroll-list">
+<header class="panel-header">
+<strong>PAYROLL LIST</strong>
+<span id="employee-count-badge">0 EMPLOYEES</span>
+</header>
+<div class="panel-body">
+<div class="payroll-table-wrap">
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Employee Name</th>
+<th>Days Worked</th>
+<th>Daily Rate</th>
+<th>Gross Pay</th>
+<th>Deduction Amount</th>
+<th>Net Pay</th>
+</tr>
+</thead>
+<tbody id="payroll-tbody"></tbody>
+</table>
+<!-- placeholder message shown when no employee records exist -->
+<div class="empty-payroll" id="empty-payroll">
+<strong>No payroll records yet</strong>
+<p>Enter employee details and select Add to payroll to begin.</p>
+</div>
+</div>
+<p class="line-note">No. = Payroll list line number</p>
+<div class="payroll-formulas">
+<strong>Gross Pay = Days Worked × Daily Rate</strong>
+<strong>Net Pay = Gross Pay − Deduction Amount</strong>
+</div>
+<!-- controls to remove a payroll entry by its 1-based row number -->
+<div class="delete-area">
+<div>
+<strong>DELETE A RECORD</strong>
+<p>Enter the line number to delete.</p>
+</div>
+<label>
+<span>Line Number</span>
+<input id="delete-line-input" min="1" placeholder="e.g. 1" type="number"/>
+</label>
+<button id="delete-record-btn" type="button">
+                  Delete record
+                </button>
+</div>
+<p class="table-update-note">
+                The payroll table updates after a record is added or deleted.
+              </p>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+<!-- theme management script that syncs dark/light mode across local storage and swaps icons -->
+
+<!-- payroll state management script for adding, validating, rendering, and deleting records -->
+
+<script>
+    (function () {
+      // currency formatter configured for philippine peso with two decimal places
+      const money = new Intl.NumberFormat("en-PH", {
+        style: "currency",
+        currency: "PHP",
+        minimumFractionDigits: 2,
+      });
+
+      // in-memory array storing employee payroll objects
+      let records = [];
+
+      const form = document.getElementById("payroll-form");
+      const nameInput = document.getElementById("emp-name");
+      const daysInput = document.getElementById("emp-days");
+      const rateInput = document.getElementById("emp-rate");
+      const deductionInput = document.getElementById("emp-deduction");
+      const tbody = document.getElementById("payroll-tbody");
+      const emptyState = document.getElementById("empty-payroll");
+      const countBadge = document.getElementById("employee-count-badge");
+      const deleteInput = document.getElementById("delete-line-input");
+      const deleteBtn = document.getElementById("delete-record-btn");
+
+      // allow only letters (a-z, a-z) and spaces in employee name
+      nameInput.addEventListener("input", () => {
+        nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, "");
+      });
+
+      // clears any custom browser validation message on the delete input
+      function clearDeleteError() {
+        deleteInput.setCustomValidity("");
+      }
+
+      // displays a native validation tooltip and focuses the delete input when an error occurs
+      function showDeleteError(message) {
+        deleteInput.setCustomValidity(message);
+        deleteInput.reportValidity();
+        deleteInput.focus();
+      }
+
+      deleteInput.addEventListener("input", clearDeleteError);
+
+      // sanitizes special html characters to prevent cross-site scripting when rendering employee names
+      function escapeHtml(str) {
+        return str
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      // rebuilds the payroll table rows, updates the employee count badge, and toggles the empty state
+      function render() {
+        countBadge.textContent = `${records.length} ${records.length === 1 ? "EMPLOYEE" : "EMPLOYEES"}`;
+        emptyState.style.display = records.length === 0 ? "block" : "none";
+        tbody.innerHTML = records
+          .map(
+            (rec, idx) => `
+              <tr>
+                <td>${idx + 1}</td>
+                <td>${escapeHtml(rec.name)}</td>
+                <td>${rec.days}</td>
+                <td>${money.format(rec.rate)}</td>
+                <td>${money.format(rec.gross)}</td>
+                <td>${money.format(rec.deduction)}</td>
+                <td>${money.format(rec.net)}</td>
+              </tr>`
+          )
+          .join("");
+      }
+
+      // validates form inputs, calculates gross and net pay, appends a new record, and clears fields
+      function addRecord() {
+        const cleanName = nameInput.value.replace(/[^a-zA-Z\s]/g, "").trim();
+
+        // stop submission if any of the four inputs are empty
+        if (
+          !cleanName ||
+          daysInput.value.trim() === "" ||
+          rateInput.value.trim() === "" ||
+          deductionInput.value.trim() === ""
+        ) {
+          if (!cleanName) {
+            nameInput.value = "";
+            nameInput.focus();
+          }
+          form.reportValidity();
+          return;
+        }
+
+        const dayCount = Math.max(0, Number(daysInput.value));
+        const dailyRate = Math.max(0, Number(rateInput.value));
+        const deductionAmount = Math.max(0, Number(deductionInput.value));
+        const gross = dayCount * dailyRate;
+
+        records.push({
+          name: cleanName,
+          days: dayCount,
+          rate: dailyRate,
+          gross: gross,
+          deduction: deductionAmount,
+          net: gross - deductionAmount,
+        });
+
+        nameInput.value = "";
+        daysInput.value = "";
+        rateInput.value = "";
+        deductionInput.value = "";
+        nameInput.focus();
+        clearDeleteError();
+        render();
+      }
+
+      // validates the entered line number and removes the matching record from the payroll array
+      function deleteRecord() {
+        const rawValue = deleteInput.value.trim();
+
+        if (records.length === 0) {
+          showDeleteError("There are no payroll records to delete.");
+          return;
+        }
+
+        if (rawValue === "") {
+          showDeleteError("Please enter a line number to delete.");
+          return;
+        }
+
+        const lineNumber = Number(rawValue);
+        const index = lineNumber - 1;
+
+        if (!Number.isInteger(lineNumber) || index < 0 || index >= records.length) {
+          showDeleteError(
+            `Line number ${rawValue} was not found. Enter a number from 1 to ${records.length}.`
+          );
+          return;
+        }
+
+        records.splice(index, 1);
+        deleteInput.value = "";
+        clearDeleteError();
+        render();
+      }
+
+      // handle form submit event
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        addRecord();
+      });
+
+      // submit employee record on enter key inside any employee detail input
+      [nameInput, daysInput, rateInput, deductionInput].forEach((input) => {
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            addRecord();
+          }
+        });
+      });
+
+      // delete record on click or enter key inside the line number input
+      deleteBtn.addEventListener("click", deleteRecord);
+      deleteInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          deleteRecord();
+        }
+      });
+    })();
+  </script></body>
+</html>
